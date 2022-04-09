@@ -2,16 +2,16 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>CS15-445: Database on CS-Courses-Notes</title>
-    <link>http://CS-Courses-Notes.github.io/cmucourses/cmu-15-445/</link>
+    <link>https://CS-Courses-Notes.github.io/cmucourses/cmu-15-445/</link>
     <description>Recent content in CS15-445: Database on CS-Courses-Notes</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language><atom:link href="http://CS-Courses-Notes.github.io/cmucourses/cmu-15-445/index.xml" rel="self" type="application/rss+xml" />
+    <language>en-us</language><atom:link href="https://CS-Courses-Notes.github.io/cmucourses/cmu-15-445/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Course Introduction &amp; Relational Model</title>
-      <link>http://CS-Courses-Notes.github.io/cmucourses/cmu-15-445/notes/lecture01/</link>
+      <link>https://CS-Courses-Notes.github.io/cmucourses/cmu-15-445/notes/lecture01/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://CS-Courses-Notes.github.io/cmucourses/cmu-15-445/notes/lecture01/</guid>
+      <guid>https://CS-Courses-Notes.github.io/cmucourses/cmu-15-445/notes/lecture01/</guid>
       <description>This course is on the design and implementation of disk-oriented database management systems.  Course Outline  Relational Databases Storage Execution Concurrency Control Recovery Distributed Databases Potpourri   Textbook Database System Concepts. 7th Edition. Silbersschatz, Korth, &amp;amp; Sudarshan
  Projects You will build your own storage manager from scratch of the course of the semester. Each project builds on the previous one.
  Let&amp;rsquo;s get started!
@@ -20,10 +20,10 @@
     
     <item>
       <title>Advanced SQL</title>
-      <link>http://CS-Courses-Notes.github.io/cmucourses/cmu-15-445/notes/lecture02/</link>
+      <link>https://CS-Courses-Notes.github.io/cmucourses/cmu-15-445/notes/lecture02/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://CS-Courses-Notes.github.io/cmucourses/cmu-15-445/notes/lecture02/</guid>
+      <guid>https://CS-Courses-Notes.github.io/cmucourses/cmu-15-445/notes/lecture02/</guid>
       <description>History of SQL Originally &amp;ldquo;SEQUEL&amp;rdquo; from IBM&amp;rsquo;s System R prototype.
    Structured English Query Language.
   Adopted by Oracle in the 1970s.
@@ -34,10 +34,10 @@ Current standard is SQL 2016
     
     <item>
       <title>Database Storage - Part I</title>
-      <link>http://CS-Courses-Notes.github.io/cmucourses/cmu-15-445/notes/lecture03/</link>
+      <link>https://CS-Courses-Notes.github.io/cmucourses/cmu-15-445/notes/lecture03/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://CS-Courses-Notes.github.io/cmucourses/cmu-15-445/notes/lecture03/</guid>
+      <guid>https://CS-Courses-Notes.github.io/cmucourses/cmu-15-445/notes/lecture03/</guid>
       <description>Overview:
  We now understand what a database looks like at a logical level and how to write queries to read/write data from it. We will next learn how to build software that manages a database.   Layout of Database:
 graph TD; 1[Query Planning] 2[Operator Execution] 3[Access Methods] 4[Buffer Pool Manager] 5[Disk Manager] 1 --&amp;gt; 2 2 --&amp;gt; 3 3 --&amp;gt; 4 4 --&amp;gt; 5 We will go through these different layers bottom-up.</description>

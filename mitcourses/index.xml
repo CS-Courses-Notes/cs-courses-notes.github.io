@@ -2,16 +2,16 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>MIT-Courses on CS-Courses-Notes</title>
-    <link>http://CS-Courses-Notes.github.io/mitcourses/</link>
+    <link>https://CS-Courses-Notes.github.io/mitcourses/</link>
     <description>Recent content in MIT-Courses on CS-Courses-Notes</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language><atom:link href="http://CS-Courses-Notes.github.io/mitcourses/index.xml" rel="self" type="application/rss+xml" />
+    <language>en-us</language><atom:link href="https://CS-Courses-Notes.github.io/mitcourses/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title></title>
-      <link>http://CS-Courses-Notes.github.io/mitcourses/6.s081/</link>
+      <link>https://CS-Courses-Notes.github.io/mitcourses/6.s081/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://CS-Courses-Notes.github.io/mitcourses/6.s081/</guid>
+      <guid>https://CS-Courses-Notes.github.io/mitcourses/6.s081/</guid>
       <description></description>
     </item>
     

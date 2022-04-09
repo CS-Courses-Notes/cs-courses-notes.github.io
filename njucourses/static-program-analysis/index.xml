@@ -2,26 +2,26 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Static-Program-Analysis on CS-Courses-Notes</title>
-    <link>http://CS-Courses-Notes.github.io/njucourses/static-program-analysis/</link>
+    <link>https://CS-Courses-Notes.github.io/njucourses/static-program-analysis/</link>
     <description>Recent content in Static-Program-Analysis on CS-Courses-Notes</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language><atom:link href="http://CS-Courses-Notes.github.io/njucourses/static-program-analysis/index.xml" rel="self" type="application/rss+xml" />
+    <language>en-us</language><atom:link href="https://CS-Courses-Notes.github.io/njucourses/static-program-analysis/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Intermediate Presentation</title>
-      <link>http://CS-Courses-Notes.github.io/njucourses/static-program-analysis/lecture/intermediate-representation/</link>
+      <link>https://CS-Courses-Notes.github.io/njucourses/static-program-analysis/lecture/intermediate-representation/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://CS-Courses-Notes.github.io/njucourses/static-program-analysis/lecture/intermediate-representation/</guid>
+      <guid>https://CS-Courses-Notes.github.io/njucourses/static-program-analysis/lecture/intermediate-representation/</guid>
       <description>Layout:  Compilers and Static Analyzers AST vs. IR IR: Three-Address Code 3AC in Real Static Analyzer: Soot Static Single Assignment Basic Blocks Control Flow Graphs     Finishing this class, you need to know the answers to the following questions:
  The relation between compilers and static analyzers Understand 3AC and its common forms (in IR jimple) How to build basic blocks on top of IR How to construct control flow graphs on top of BBS.</description>
     </item>
     
     <item>
       <title>Data Flow Analysis Applications I</title>
-      <link>http://CS-Courses-Notes.github.io/njucourses/static-program-analysis/lecture/data-flow-analysis-i/</link>
+      <link>https://CS-Courses-Notes.github.io/njucourses/static-program-analysis/lecture/data-flow-analysis-i/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://CS-Courses-Notes.github.io/njucourses/static-program-analysis/lecture/data-flow-analysis-i/</guid>
+      <guid>https://CS-Courses-Notes.github.io/njucourses/static-program-analysis/lecture/data-flow-analysis-i/</guid>
       <description>Layout of these lectures:
  Overview of Data Flow Analysis Preliminaries of Data Flow Analysis Reaching Definitions Analysis Live Variable Analysis Available Expression Analysis  Overview Data Flow Analysis &amp;ndash;&amp;gt; How Data flows on CFG? &amp;ndash;&amp;gt; How application-specific Data Flows through the Nodes and Edges of CFG( a program ) ?
 Recall 1st lecture:
@@ -30,10 +30,10 @@ Recall 1st lecture:
     
     <item>
       <title>Data Flow Analysis Applications II</title>
-      <link>http://CS-Courses-Notes.github.io/njucourses/static-program-analysis/lecture/data-flow-analysis-ii/</link>
+      <link>https://CS-Courses-Notes.github.io/njucourses/static-program-analysis/lecture/data-flow-analysis-ii/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://CS-Courses-Notes.github.io/njucourses/static-program-analysis/lecture/data-flow-analysis-ii/</guid>
+      <guid>https://CS-Courses-Notes.github.io/njucourses/static-program-analysis/lecture/data-flow-analysis-ii/</guid>
       <description>Definition:
  Live variables analysis tells whether the value of variable v at program point p could be used along some path in CFG starting at p. If so, v is live at p; otherwise, v is dead at p.  One application:
  Information of live variables can be used for register allocations.  Understanding Live Variables Analysis
@@ -42,10 +42,10 @@ graph TD; 1[v = 3] 2[B. ?] 3[p1. ... = v] 4[p2.</description>
     
     <item>
       <title>Static Flow Analysis Applications III</title>
-      <link>http://CS-Courses-Notes.github.io/njucourses/static-program-analysis/lecture/data-flow-analysis-iii/</link>
+      <link>https://CS-Courses-Notes.github.io/njucourses/static-program-analysis/lecture/data-flow-analysis-iii/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://CS-Courses-Notes.github.io/njucourses/static-program-analysis/lecture/data-flow-analysis-iii/</guid>
+      <guid>https://CS-Courses-Notes.github.io/njucourses/static-program-analysis/lecture/data-flow-analysis-iii/</guid>
       <description>What is Available Expression Analysis An expression x op y is available at a program point p if
  all paths from the entry to p must pass through the evaluation of x op y, and after the last evaluation of x op y, there is no redefinition of x or y  Note that this is a must analysis.
 What we can do with this definition  This definition means at program p, we can replace expression x op y by the result of its last evaluation The information of available expressions can be used for detecting global common subexpressions.</description>
@@ -53,20 +53,20 @@ What we can do with this definition  This definition means at program p, we can 
     
     <item>
       <title>Data flow Analysis IV - Foundations I</title>
-      <link>http://CS-Courses-Notes.github.io/njucourses/static-program-analysis/lecture/data-flow-analysis-iv/</link>
+      <link>https://CS-Courses-Notes.github.io/njucourses/static-program-analysis/lecture/data-flow-analysis-iv/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://CS-Courses-Notes.github.io/njucourses/static-program-analysis/lecture/data-flow-analysis-iv/</guid>
+      <guid>https://CS-Courses-Notes.github.io/njucourses/static-program-analysis/lecture/data-flow-analysis-iv/</guid>
       <description>Layout of contents:
  Iterative Algorithm, Another view Partial Order Upper and Lower Bounds Lattice, Semilattice, Complete and Product Lattice Data Flow Analysis Framework via Lattice Monotonicity and Fixed Point Theorem Relate Iterative Algorithm to Fixed Point Theorem May/Must Analysis, A Lattice View Distributivity and MOP Constant Propagation Worklist Algorithm  View Iterative Algorithm in Another Way  Given a CFG(a program) with k nodes, the iterative algorithm updates OUT[n] for every node in each iteration.</description>
     </item>
     
     <item>
       <title>Data Flow Analysis V : Foundations II</title>
-      <link>http://CS-Courses-Notes.github.io/njucourses/static-program-analysis/lecture/data-flow-analysis-v/</link>
+      <link>https://CS-Courses-Notes.github.io/njucourses/static-program-analysis/lecture/data-flow-analysis-v/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://CS-Courses-Notes.github.io/njucourses/static-program-analysis/lecture/data-flow-analysis-v/</guid>
+      <guid>https://CS-Courses-Notes.github.io/njucourses/static-program-analysis/lecture/data-flow-analysis-v/</guid>
       <description>The first thing we need to deal with is relating the algorithm to the function we talked about in the last lecture.
 In each iteration of our algorithm, we have a (L1, L2, &amp;hellip; ,Lk), $L^k$ for short.
 It is equivalent to think that we apply function F which consists of
@@ -75,10 +75,10 @@ It is equivalent to think that we apply function F which consists of
     
     <item>
       <title>Interprocedural Analysis</title>
-      <link>http://CS-Courses-Notes.github.io/njucourses/static-program-analysis/lecture/interprocedural-analysis/</link>
+      <link>https://CS-Courses-Notes.github.io/njucourses/static-program-analysis/lecture/interprocedural-analysis/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://CS-Courses-Notes.github.io/njucourses/static-program-analysis/lecture/interprocedural-analysis/</guid>
+      <guid>https://CS-Courses-Notes.github.io/njucourses/static-program-analysis/lecture/interprocedural-analysis/</guid>
       <description>Contents
  Motivation Call Graph Construction(CHA) Interprocedural Control-Flow Graph Interprocedural Data-Flow-Analysis   So far, all analyses we learned are intraprocedural. So how to deal with method calls ?
  Make the most conservative assumption for method calls, for safe-approximation  Example. Const Propagation
