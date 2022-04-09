@@ -9,7 +9,7 @@
 
     <link rel="icon" href="/images/favicon.png" type="image/png">
 
-    <title>Data Flow Analysis Applications II :: My New Hugo Site</title>
+    <title>Database Storage - Part I :: My New Hugo Site</title>
 
     
     <link href="/css/nucleus.css?1649463002" rel="stylesheet">
@@ -35,7 +35,7 @@
     </style>
     
   </head>
-  <body class="" data-url="/njucourses/static-program-analysis/lecture/data-flow-analysis-ii/">
+  <body class="" data-url="/cmucourses/cmu-15-445/notes/lecture03/">
     <nav id="sidebar" class="">
 
 
@@ -170,7 +170,7 @@
   
     
     <li data-nav-id="/cmucourses/" title="CMU-Courses" class="dd-item
-        
+        parent
         
         
         ">
@@ -199,7 +199,7 @@
   
     
     <li data-nav-id="/cmucourses/cmu-15-445/" title="CS15-445: Database" class="dd-item
-        
+        parent
         
         
         ">
@@ -267,7 +267,7 @@
  
   
     
-      <li data-nav-id="/cmucourses/cmu-15-445/notes/lecture03/" title="Database Storage - Part I" class="dd-item ">
+      <li data-nav-id="/cmucourses/cmu-15-445/notes/lecture03/" title="Database Storage - Part I" class="dd-item active">
         <a href="/cmucourses/cmu-15-445/notes/lecture03/">
         Database Storage - Part I
         
@@ -360,7 +360,7 @@
   
     
     <li data-nav-id="/njucourses/" title="NJU-Courses" class="dd-item
-        parent
+        
         
         
         ">
@@ -389,7 +389,7 @@
   
     
     <li data-nav-id="/njucourses/static-program-analysis/" title="Static-Program-Analysis" class="dd-item
-        parent
+        
         
         
         ">
@@ -457,7 +457,7 @@
  
   
     
-      <li data-nav-id="/njucourses/static-program-analysis/lecture/data-flow-analysis-ii/" title="Data Flow Analysis Applications II" class="dd-item active">
+      <li data-nav-id="/njucourses/static-program-analysis/lecture/data-flow-analysis-ii/" title="Data Flow Analysis Applications II" class="dd-item ">
         <a href="/njucourses/static-program-analysis/lecture/data-flow-analysis-ii/">
         Data Flow Analysis Applications II
         
@@ -694,7 +694,7 @@
             
           
           
-            <a href='/'>CS-Courses-Notes</a> > <a href='/njucourses/'>NJU-Courses</a> > <a href='/njucourses/static-program-analysis/'>Static-Program-Analysis</a> > Data Flow Analysis Applications II
+            <a href='/'>CS-Courses-Notes</a> > <a href='/cmucourses/'>CMU-Courses</a> > <a href='/cmucourses/cmu-15-445/'>CS15-445: Database</a> > Database Storage - Part I
           
         
           
@@ -709,7 +709,16 @@
                 
                     <div class="progress">
     <div class="wrapper">
-<nav id="TableOfContents"></nav>
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#disk-oriented-architecture">Disk-Oriented Architecture</a>
+      <ul>
+        <li><a href="#system-design-goals">System Design Goals</a></li>
+        <li><a href="#high-level-overview-of-the-total-design">High-level Overview of The Total Design</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
     </div>
 </div>
 
@@ -725,84 +734,43 @@
           
             <h1>
               
-              Data Flow Analysis Applications II
+              Database Storage - Part I
             </h1>
           
 
         
 
 
-<p>Definition:</p>
+<p>Overview:</p>
 <ul>
-<li>Live variables analysis tells whether the value of variable v at program point p could be used along some path in CFG starting at p. If so, v is live at p; otherwise, v is dead at p.</li>
+<li>We now understand what a database looks like at a logical level and how to write queries to read/write data from it.</li>
+<li>We will next learn how to build software that manages a database.</li>
 </ul>
-<p>One application:</p>
-<ul>
-<li>Information of live variables can be used for register allocations.</li>
-</ul>
-<p>Understanding Live Variables Analysis</p>
+<hr>
+<p>Layout of Database:</p>
 <pre tabindex="0"><code class="language-mermaid" data-lang="mermaid">graph TD;
-	1[v = 3]
-	2[B. ?]
-	3[p1. ... = v]
-	4[p2. ... ...]
-	1--&gt;2
-	2--&gt;3
-	2--&gt;4
-</code></pre><p>Considering Back Analysis:</p>
-<ol>
-<li>May analysis</li>
-</ol>
-<p>$$
-OUT[B] = \cup \space IN[p]
-$$</p>
-<ol start="2">
-<li>OUT[B] = {v}, how we can get IN[B]</li>
-</ol>
+	1[Query Planning]
+	2[Operator Execution]
+	3[Access Methods]
+	4[Buffer Pool Manager]
+	5[Disk Manager]
+	1 --&gt; 2
+	2 --&gt; 3
+	3 --&gt; 4
+	4 --&gt; 5
+</code></pre><p>We will go through these different layers bottom-up.</p>
+<hr>
+<h2 id="disk-oriented-architecture">Disk-Oriented Architecture</h2>
 <ul>
-<li>
-<p>Tip: determine whether the variable v in some register R is live, or should we delete the value 3 of v in R, at the point of IN[B]?</p>
-<ul>
-<li>Yes: IN[B] = {v}</li>
-<li>No: IN[B] = {}</li>
+<li>The DBMS assumes that the primary storage location of the database is on non-volatile disk.</li>
+<li>The DBMS &rsquo;s components manage the movement of data between non-volatile and volatile storage.</li>
 </ul>
-</li>
-<li>
-<ol>
-<li>​          B.?   :       k=n         &ndash;&gt;           IN[B]={v}</li>
-<li>​          B.?   :       k=v          &ndash;&gt;           IN[B]={v}</li>
-<li>​          B.?   :       v=2          &ndash;&gt;           IN[B]={}</li>
-<li>​          B.?   :       v=v+1     &ndash;&gt;            IN[B]={v}</li>
-</ol>
-</li>
-<li>
-<p>Thus
-$$
-IN[B] = use_B \cup (OUT[B]-def_B)
-$$
-Method:</p>
-<ul>
-<li>IN[exit] = empty set</li>
-<li>for each basic block B\exit
-<ul>
-<li>IN[B] = empty set</li>
-</ul>
-</li>
-<li>while changes to any IN occur
-<ul>
-<li>for each basic block B\exit
-<ul>
-<li>update OUT[B] and IN[B]</li>
-</ul>
-</li>
-<li>End for</li>
-</ul>
-</li>
-<li>End while</li>
-</ul>
-</li>
-</ul>
-<p>May analysis: initialize to empty ;  Must analysis: initialize to full</p>
+<p>Remembering that in the storage hierarchy, layers above DRAM are volatile, random access and byte-addressable, and the layers underneath SSD are non-volatile, sequential access and block-addressable.</p>
+<p>We now care about moving data that is non-volatile into layers that data that is volatile.</p>
+<p>In this course, we will call DRAM memory, and any layer below SSD Disk.</p>
+<h3 id="system-design-goals">System Design Goals</h3>
+<p>We want to create an illusion to the applications that we have enough memory to store their entire database in the memory. We want to allow the DBMS to manage databases that exceed that amount of memory available.</p>
+<h3 id="high-level-overview-of-the-total-design">High-level Overview of The Total Design</h3>
 
 
 <footer class="footline">
@@ -840,123 +808,6 @@ Method:</p>
             
                 
                     
-                        
-                        
-                    
-                
-                
-
-                    
-                    
-                        
-                    
-                    
-
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-            
-        
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
                     
                 
                 
@@ -1034,6 +885,12 @@ Method:</p>
             
         
                     
+            
+        
+                    
+            
+        
+                    
                         
             
             
@@ -1041,6 +898,114 @@ Method:</p>
                     
                         
                         
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
                     
                 
                 
@@ -1164,10 +1129,10 @@ Method:</p>
 	 
 	 
 		
-			<a class="nav nav-prev" href="/njucourses/static-program-analysis/lecture/data-flow-analysis-i/" title="Data Flow Analysis Applications I"> <i class="fa fa-chevron-left"></i></a>
+			<a class="nav nav-prev" href="/cmucourses/cmu-15-445/notes/lecture01/" title="Course Introduction &amp; Relational Model"> <i class="fa fa-chevron-left"></i></a>
 		
 		
-			<a class="nav nav-next" href="/njucourses/static-program-analysis/lecture/data-flow-analysis-iii/" title="Static Flow Analysis Applications III" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+			<a class="nav nav-next" href="/mitcourses/" title="MIT-Courses" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
 		
 	
     </div>

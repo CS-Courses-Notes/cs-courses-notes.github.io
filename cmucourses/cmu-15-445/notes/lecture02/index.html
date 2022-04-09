@@ -9,7 +9,7 @@
 
     <link rel="icon" href="/images/favicon.png" type="image/png">
 
-    <title>Data Flow Analysis Applications II :: My New Hugo Site</title>
+    <title>Advanced SQL :: My New Hugo Site</title>
 
     
     <link href="/css/nucleus.css?1649463002" rel="stylesheet">
@@ -35,7 +35,7 @@
     </style>
     
   </head>
-  <body class="" data-url="/njucourses/static-program-analysis/lecture/data-flow-analysis-ii/">
+  <body class="" data-url="/cmucourses/cmu-15-445/notes/lecture02/">
     <nav id="sidebar" class="">
 
 
@@ -170,7 +170,7 @@
   
     
     <li data-nav-id="/cmucourses/" title="CMU-Courses" class="dd-item
-        
+        parent
         
         
         ">
@@ -199,7 +199,7 @@
   
     
     <li data-nav-id="/cmucourses/cmu-15-445/" title="CS15-445: Database" class="dd-item
-        
+        parent
         
         
         ">
@@ -225,7 +225,7 @@
  
   
     
-      <li data-nav-id="/cmucourses/cmu-15-445/notes/lecture02/" title="Advanced SQL" class="dd-item ">
+      <li data-nav-id="/cmucourses/cmu-15-445/notes/lecture02/" title="Advanced SQL" class="dd-item active">
         <a href="/cmucourses/cmu-15-445/notes/lecture02/">
         Advanced SQL
         
@@ -360,7 +360,7 @@
   
     
     <li data-nav-id="/njucourses/" title="NJU-Courses" class="dd-item
-        parent
+        
         
         
         ">
@@ -389,7 +389,7 @@
   
     
     <li data-nav-id="/njucourses/static-program-analysis/" title="Static-Program-Analysis" class="dd-item
-        parent
+        
         
         
         ">
@@ -457,7 +457,7 @@
  
   
     
-      <li data-nav-id="/njucourses/static-program-analysis/lecture/data-flow-analysis-ii/" title="Data Flow Analysis Applications II" class="dd-item active">
+      <li data-nav-id="/njucourses/static-program-analysis/lecture/data-flow-analysis-ii/" title="Data Flow Analysis Applications II" class="dd-item ">
         <a href="/njucourses/static-program-analysis/lecture/data-flow-analysis-ii/">
         Data Flow Analysis Applications II
         
@@ -694,7 +694,7 @@
             
           
           
-            <a href='/'>CS-Courses-Notes</a> > <a href='/njucourses/'>NJU-Courses</a> > <a href='/njucourses/static-program-analysis/'>Static-Program-Analysis</a> > Data Flow Analysis Applications II
+            <a href='/'>CS-Courses-Notes</a> > <a href='/cmucourses/'>CMU-Courses</a> > <a href='/cmucourses/cmu-15-445/'>CS15-445: Database</a> > Advanced SQL
           
         
           
@@ -709,7 +709,16 @@
                 
                     <div class="progress">
     <div class="wrapper">
-<nav id="TableOfContents"></nav>
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#history-of-sql">History of SQL</a></li>
+    <li><a href="#main-content-of-this-lecture">Main Content of This Lecture</a></li>
+    <li><a href="#aggregates--group-by">Aggregates + Group By</a></li>
+    <li><a href="#string-operations">String Operations</a></li>
+    <li><a href="#datetime-operations">DATE/TIME Operations</a></li>
+    <li><a href="#output-redirection">OUTPUT Redirection</a></li>
+  </ul>
+</nav>
     </div>
 </div>
 
@@ -725,84 +734,171 @@
           
             <h1>
               
-              Data Flow Analysis Applications II
+              Advanced SQL
             </h1>
           
 
         
 
 
-<p>Definition:</p>
-<ul>
-<li>Live variables analysis tells whether the value of variable v at program point p could be used along some path in CFG starting at p. If so, v is live at p; otherwise, v is dead at p.</li>
-</ul>
-<p>One application:</p>
-<ul>
-<li>Information of live variables can be used for register allocations.</li>
-</ul>
-<p>Understanding Live Variables Analysis</p>
-<pre tabindex="0"><code class="language-mermaid" data-lang="mermaid">graph TD;
-	1[v = 3]
-	2[B. ?]
-	3[p1. ... = v]
-	4[p2. ... ...]
-	1--&gt;2
-	2--&gt;3
-	2--&gt;4
-</code></pre><p>Considering Back Analysis:</p>
-<ol>
-<li>May analysis</li>
-</ol>
-<p>$$
-OUT[B] = \cup \space IN[p]
-$$</p>
-<ol start="2">
-<li>OUT[B] = {v}, how we can get IN[B]</li>
-</ol>
+<h2 id="history-of-sql">History of SQL</h2>
+<p>Originally &ldquo;SEQUEL&rdquo; from IBM&rsquo;s System R prototype.</p>
+<blockquote>
 <ul>
 <li>
-<p>Tip: determine whether the variable v in some register R is live, or should we delete the value 3 of v in R, at the point of IN[B]?</p>
-<ul>
-<li>Yes: IN[B] = {v}</li>
-<li>No: IN[B] = {}</li>
-</ul>
+<p>Structured English Query Language.</p>
 </li>
 <li>
-<ol>
-<li>​          B.?   :       k=n         &ndash;&gt;           IN[B]={v}</li>
-<li>​          B.?   :       k=v          &ndash;&gt;           IN[B]={v}</li>
-<li>​          B.?   :       v=2          &ndash;&gt;           IN[B]={}</li>
-<li>​          B.?   :       v=v+1     &ndash;&gt;            IN[B]={v}</li>
-</ol>
+<p>Adopted by Oracle in the 1970s.</p>
 </li>
-<li>
-<p>Thus
-$$
-IN[B] = use_B \cup (OUT[B]-def_B)
-$$
-Method:</p>
+</ul>
+</blockquote>
+<p>ANSI Standard in 1986. ISO in 1987 &ndash;&gt; Structured Query Language</p>
+<p>Current standard is SQL 2016</p>
 <ul>
-<li>IN[exit] = empty set</li>
-<li>for each basic block B\exit
+<li>SQL 2016 : JSON, Polymorphic tables</li>
+<li>SQL 2011 :  Temporal DBs, Pipelined DML</li>
+<li>SQL 2008: TRUNCATE, Fancy ORDER</li>
+<li>SQL 2003: XML, windows, sequences, auto-generated IDs</li>
+<li>SQL 1999: Regex, triggers, OO</li>
+</ul>
+<hr>
+<p>Relational Languages:</p>
 <ul>
-<li>IN[B] = empty set</li>
+<li>Data Manipulation Language (DML)</li>
+<li>Data Definition Language(DDL)</li>
+<li>Data Control Language(DCL)  &ndash;&gt; security authentication</li>
 </ul>
-</li>
-<li>while changes to any IN occur
+<p>Important thing to know:</p>
+<p>Different from in relational algebra that is totally based on sets, SQL is based on bags(duplicate) algebra.  Sets&ndash;&gt;(no duplicate)</p>
+<hr>
+<h2 id="main-content-of-this-lecture">Main Content of This Lecture</h2>
+<p>Back to our main content.</p>
+<p>In this lecture you will learn:</p>
 <ul>
-<li>for each basic block B\exit
+<li>Aggregations + Group By</li>
+<li>String / Date / Time operations</li>
+<li>Output Control + Redirection</li>
+<li>Nested Queries</li>
+<li>Common Table Expressions</li>
+<li>Window Functions</li>
+</ul>
+<hr>
+<h2 id="aggregates--group-by">Aggregates + Group By</h2>
+<p>Def: Functions that return a single value from a bag of tuples:</p>
 <ul>
-<li>update OUT[B] and IN[B]</li>
+<li>AVG(col), MIN(col), MAX(col), SUM(col), COUNT(col)</li>
 </ul>
-</li>
-<li>End for</li>
+<p>Aggregate functions can only be used in the SELECT output list.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">SELECT</span> <span style="color:#66d9ef">COUNT</span>(login) <span style="color:#66d9ef">AS</span> cnt
+	<span style="color:#66d9ef">FROM</span> student <span style="color:#66d9ef">WHERE</span> login <span style="color:#66d9ef">LIKE</span> <span style="color:#e6db74">&#39;%@cs&#39;</span>
+</code></pre></div><p>And since we just want to get # of tuples, the login in COUNT does not mean anything, so we can just write</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">SELECT</span> <span style="color:#66d9ef">COUNT</span>(<span style="color:#f92672">*</span>) <span style="color:#66d9ef">AS</span> cnt
+	<span style="color:#66d9ef">FROM</span> student <span style="color:#66d9ef">WHERE</span> login <span style="color:#66d9ef">LIKE</span> <span style="color:#e6db74">&#39;%@cs&#39;</span>
+</code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">SELECT</span> <span style="color:#66d9ef">COUNT</span>(<span style="color:#ae81ff">1</span>) <span style="color:#66d9ef">AS</span> cnt
+	<span style="color:#66d9ef">FROM</span> student <span style="color:#66d9ef">WHERE</span> login <span style="color:#66d9ef">LIKE</span> <span style="color:#e6db74">&#39;%@cs&#39;</span>
+</code></pre></div><ul>
+<li>Multiple Aggregation</li>
 </ul>
-</li>
-<li>End while</li>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-SQL" data-lang="SQL"><span style="color:#66d9ef">SELECT</span> <span style="color:#66d9ef">AVG</span>(gpa), <span style="color:#66d9ef">COUNT</span>(sid)
+	<span style="color:#66d9ef">FROM</span> student <span style="color:#66d9ef">WHERE</span> login <span style="color:#66d9ef">LIKE</span> <span style="color:#e6db74">&#39;%@cs&#39;</span>
+</code></pre></div><ul>
+<li>Distinct Aggregation</li>
 </ul>
-</li>
+<p>COUNT, SUM, AVG support DISTINCT</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-SQL" data-lang="SQL"><span style="color:#66d9ef">SELECT</span> <span style="color:#66d9ef">COUNT</span>(<span style="color:#66d9ef">DISTINCT</span> login)
+	<span style="color:#66d9ef">FROM</span> student <span style="color:#66d9ef">WHERE</span> login <span style="color:#66d9ef">LIKE</span> <span style="color:#e6db74">&#39;%@cs&#39;</span>
+</code></pre></div><hr>
+<p>Note that the output of other columns outside of an aggregate is undefined.</p>
+<p>Now we have this example:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">SELECT</span> <span style="color:#66d9ef">AVG</span>(s.gpa), e.cid
+	<span style="color:#66d9ef">FROM</span> enrolled <span style="color:#66d9ef">AS</span> e, student <span style="color:#66d9ef">AS</span> s
+  <span style="color:#66d9ef">WHERE</span> e.sid <span style="color:#f92672">=</span> s.sid
+</code></pre></div><p>In some DB app we will get the error message: column &lsquo;e.cid&rsquo; must appear in the GROUP BY clause or be used in an aggregate function.</p>
+<p>Some will just choose a random e.cid as the output.</p>
+<p>Quick fix of this:</p>
+<p>The error message has told us how to fix this:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">SELECT</span> <span style="color:#66d9ef">AVG</span>(s.gpa), e.cid
+	<span style="color:#66d9ef">FROM</span> enrolled <span style="color:#66d9ef">AS</span> e, student <span style="color:#66d9ef">AS</span> s
+   <span style="color:#66d9ef">WHERE</span> e.sid <span style="color:#f92672">=</span> s.sid
+   <span style="color:#66d9ef">GROUP</span> <span style="color:#66d9ef">BY</span> e.cid
+</code></pre></div><p>In GROUP BY, we project tuples into subsets and calculate aggregates against each subset.</p>
+<blockquote>
+<p>Non-aggregated Values in SELECT output clause must appear in GROUP BY clause.</p>
+</blockquote>
+<hr>
+<ul>
+<li>Filters results based on aggregation computation, like a WHERE clause for a GROUP BY</li>
 </ul>
-<p>May analysis: initialize to empty ;  Must analysis: initialize to full</p>
+<p>For example:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">SELECT</span> <span style="color:#66d9ef">AVG</span>(s.gpa) <span style="color:#66d9ef">AS</span> avg_gpa, e.cid
+	<span style="color:#66d9ef">FROM</span> enrolled <span style="color:#66d9ef">AS</span> e, student <span style="color:#66d9ef">AS</span> s
+  <span style="color:#66d9ef">WHERE</span> e.sid <span style="color:#f92672">=</span> s.sid
+    <span style="color:#66d9ef">AND</span> avg_gpa <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">3</span>.<span style="color:#ae81ff">9</span>
+  <span style="color:#66d9ef">GROUP</span> <span style="color:#66d9ef">BY</span> e.cid
+</code></pre></div><p>Now we introduce HAVING:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">SELECT</span> <span style="color:#66d9ef">AVG</span>(s.gpa) <span style="color:#66d9ef">AS</span> avg_gpa, e.cid
+	<span style="color:#66d9ef">FROM</span> enrolled <span style="color:#66d9ef">AS</span> e, student <span style="color:#66d9ef">AS</span> s
+  <span style="color:#66d9ef">WHERE</span> e.sid <span style="color:#f92672">=</span> s.sid
+  <span style="color:#66d9ef">GROUP</span> <span style="color:#66d9ef">BY</span> e.cid
+  <span style="color:#66d9ef">HAVING</span> avg_gpa <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">3</span>.<span style="color:#ae81ff">9</span>;
+</code></pre></div><hr>
+<h2 id="string-operations">String Operations</h2>
+<p>The requirements of string varies for different databases:</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>String Case</th>
+<th>String Quotes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SQL-92</td>
+<td>Sensitive</td>
+<td>Single Only</td>
+</tr>
+<tr>
+<td>Postgres</td>
+<td>Sensitive</td>
+<td>Single Only</td>
+</tr>
+<tr>
+<td>MYSQL</td>
+<td>Insensitive</td>
+<td>Single/Double</td>
+</tr>
+<tr>
+<td>SQLite</td>
+<td>Sensitive</td>
+<td>Single/Double</td>
+</tr>
+<tr>
+<td>DB2</td>
+<td>Sensitive</td>
+<td>Single Only</td>
+</tr>
+<tr>
+<td>Oracle</td>
+<td>Sensitive</td>
+<td>Single Only</td>
+</tr>
+</tbody>
+</table>
+<p>LIKE is used for string matching('%' matching any substr(including NULL), &lsquo;_&rsquo; matching any one character)</p>
+<hr>
+<h2 id="datetime-operations">DATE/TIME Operations</h2>
+<p>See more in manuals.</p>
+<hr>
+<h2 id="output-redirection">OUTPUT Redirection</h2>
+<p>If we want to store query results in another table, we need to know:</p>
+<ul>
+<li>Table must not already be defined.</li>
+<li>Table will have the same # of columns with the same types as the input.</li>
+</ul>
+<hr>
+<p>Actually this lecture can be learned just using the manual. So I just gonna leave out the left part. RTFM instead.</p>
 
 
 <footer class="footline">
@@ -840,8 +936,125 @@ Method:</p>
             
                 
                     
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
                         
                         
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
                     
                 
                 
@@ -914,133 +1127,10 @@ Method:</p>
             
         
                     
-            
-        
-                    
-            
-        
-                    
                         
             
             
                 
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                    
-                
-                
-
-                    
-                    
-                        
-                    
-                    
-
-                    
-                        
-            
-            
-                
-                    
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-                        
-            
-            
-                
-                    
-                        
-                        
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                        
-                        
                     
                 
                 
@@ -1164,10 +1254,10 @@ Method:</p>
 	 
 	 
 		
-			<a class="nav nav-prev" href="/njucourses/static-program-analysis/lecture/data-flow-analysis-i/" title="Data Flow Analysis Applications I"> <i class="fa fa-chevron-left"></i></a>
+			<a class="nav nav-prev" href="/cmucourses/cmu-15-445/" title="CS15-445: Database"> <i class="fa fa-chevron-left"></i></a>
 		
 		
-			<a class="nav nav-next" href="/njucourses/static-program-analysis/lecture/data-flow-analysis-iii/" title="Static Flow Analysis Applications III" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+			<a class="nav nav-next" href="/cmucourses/cmu-15-445/notes/lecture01/" title="Course Introduction &amp; Relational Model" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
 		
 	
     </div>
