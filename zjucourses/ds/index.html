@@ -9,7 +9,7 @@
 
     <link rel="icon" href="/images/favicon.png" type="image/png">
 
-    <title>Course Introduction &amp; Relational Model :: CS-Courses-Notes</title>
+    <title>Fundamental-DataStructure :: CS-Courses-Notes</title>
 
     
     <link href="/css/nucleus.css?1649515128" rel="stylesheet">
@@ -35,7 +35,7 @@
     </style>
     
   </head>
-  <body class="" data-url="/cmucourses/cmu-15-445/notes/lecture01/">
+  <body class="" data-url="/zjucourses/ds/">
     <nav id="sidebar" class="">
 
 
@@ -125,7 +125,7 @@
   
     
     <li data-nav-id="/cmucourses/" title="CMU-Courses" class="dd-item
-        parent
+        
         
         
         ">
@@ -154,7 +154,7 @@
   
     
     <li data-nav-id="/cmucourses/cmu-15-445/" title="CS15-445: Database" class="dd-item
-        parent
+        
         
         
         ">
@@ -180,7 +180,7 @@
  
   
     
-      <li data-nav-id="/cmucourses/cmu-15-445/notes/lecture01/" title="Course Introduction &amp; Relational Model" class="dd-item active">
+      <li data-nav-id="/cmucourses/cmu-15-445/notes/lecture01/" title="Course Introduction &amp; Relational Model" class="dd-item ">
         <a href="/cmucourses/cmu-15-445/notes/lecture01/">
         Course Introduction &amp; Relational Model
         
@@ -630,7 +630,7 @@
   
     
     <li data-nav-id="/zjucourses/" title="ZJU-Courses" class="dd-item
-        
+        parent
         
         
         ">
@@ -659,8 +659,8 @@
   
     
     <li data-nav-id="/zjucourses/ds/" title="Fundamental-DataStructure" class="dd-item
-        
-        
+        parent
+        active
         
         ">
       <a href="/zjucourses/ds/">
@@ -747,32 +747,14 @@
                   <span class="links">
                  
                  
-                   Course Introduction &amp; Relational Model
+                   Fundamental-DataStructure
                  
                   </span>
                 </div>
                 
                     <div class="progress">
     <div class="wrapper">
-<nav id="TableOfContents">
-  <ul>
-    <li><a href="#course-outline">Course Outline</a></li>
-    <li><a href="#textbook">Textbook</a></li>
-    <li><a href="#projects">Projects</a>
-      <ul>
-        <li><a href="#about-data-integrity">About Data Integrity</a></li>
-        <li><a href="#about-implementation">About Implementation</a></li>
-        <li><a href="#about-durability">About Durability</a></li>
-        <li><a href="#database-management-system">Database Management System</a></li>
-        <li><a href="#early-dbms">Early DBMS</a></li>
-        <li><a href="#relational-model">Relational Model</a></li>
-        <li><a href="#relational-algebra">Relational Algebra</a></li>
-        <li><a href="#observation">Observation</a></li>
-      </ul>
-    </li>
-    <li><a href="#conclusion">Conclusion</a></li>
-  </ul>
-</nav>
+<nav id="TableOfContents"></nav>
     </div>
 </div>
 
@@ -788,7 +770,7 @@
           
             <h1>
               
-              Course Introduction &amp; Relational Model
+              Fundamental-DataStructure
             </h1>
           
 
@@ -822,230 +804,31 @@
   </script>
   <script src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
-<ul>
-<li>This course is on the design and implementation of disk-oriented database management systems.</li>
-</ul>
-<h2 id="course-outline">Course Outline</h2>
-<ul>
-<li>Relational Databases</li>
-<li>Storage</li>
-<li>Execution</li>
-<li>Concurrency Control</li>
-<li>Recovery</li>
-<li>Distributed Databases</li>
-<li>Potpourri</li>
-</ul>
-<hr>
-<h2 id="textbook">Textbook</h2>
-<p>Database System Concepts. 7th Edition. Silbersschatz, Korth, &amp; Sudarshan</p>
-<hr>
-<h2 id="projects">Projects</h2>
-<p>You will build your own storage manager from scratch of the course of the semester. Each project builds on the previous one.</p>
-<hr>
-<p>Let&rsquo;s get started!</p>
-<ul>
-<li>About database:</li>
-</ul>
-<p>A database is organized collection of inter-related data that models some aspect of the real-world.</p>
-<p>Example: Create a database that models a digital music store, we need</p>
-<ul>
-<li>Information about the Artists</li>
-<li>What albums those Artists released</li>
-</ul>
-<p>=&gt; Store our databases as comma-separated value(CSV) files that we manage in our own code.</p>
-<ul>
-<li>Use a separate file per entity</li>
-<li>The application has to parse the files each time they want to read\update records.</li>
-</ul>
-<p>Artist( name, year, country ), Album ( name, artist, year )</p>
-<p>Question: How to find a certain entry, like a certain artist?</p>
-<p>A simple implementation:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">for</span> line <span style="color:#f92672">in</span> file:
-    record <span style="color:#f92672">=</span> parse(line)
-    <span style="color:#66d9ef">if</span> <span style="color:#e6db74">&#34;artist_name&#34;</span> <span style="color:#f92672">==</span> record[<span style="color:#ae81ff">0</span>]
-    	print int(record[<span style="color:#ae81ff">1</span>])
-</code></pre></div><h3 id="about-data-integrity">About Data Integrity</h3>
-<ul>
-<li>
-<p>How do we ensure that the artist is the same for each album entry ?</p>
-</li>
-<li>
-<p>What if somebody overwrites the album year with an invalid string ?</p>
-</li>
-<li>
-<p>How do we store that there are multiple artists on an album ?</p>
-</li>
-</ul>
-<h3 id="about-implementation">About Implementation</h3>
-<ul>
-<li>
-<p>How do you find a particular record ?</p>
-</li>
-<li>
-<p>What if we now want to create a new application that uses the same database?</p>
-</li>
-<li>
-<p>What if two threads try to write to the same file at the same time ?</p>
-</li>
-</ul>
-<h3 id="about-durability">About Durability</h3>
-<ul>
-<li>What if the machine crashes while our program is updating a record ?</li>
-<li>What if we want to replicate the database on multiple machines for high availability ?</li>
-</ul>
-<h3 id="database-management-system">Database Management System</h3>
-<p>A DBMS is software that allows applications to store and analyze information in a database. A general-purpose DBMS is designed to allow the definition, creation, querying, update and administration of databases, without the need of knowing the details of the above questions.</p>
-<h3 id="early-dbms">Early DBMS</h3>
-<p>Tight coupling between logical and physical layers.</p>
-<p>You have to (roughly) know what queries your app would execute before you deployed the database.  (Hard to maintain)</p>
-<p>&ndash;&gt; solution: relational model</p>
-<h3 id="relational-model">Relational Model</h3>
-<p>Proposed in 1970 by Ted Codd.</p>
-<p>Database abstraction to avoid this maintenance:</p>
-<ul>
-<li>Store database in simple data structures</li>
-<li>Access data through high-level language</li>
-<li>Physical storage left up to implementation.</li>
-</ul>
-<hr>
-<p>A data model is collection of concepts for describing the data in a database.</p>
-<p>A schema is a description of a particular collection of data, using a given data model.</p>
-<p>Some categories of data models:  Relational, Key/Value, Graph, Document, Column-family, Array/Matrix, Hierarchical, Network</p>
-<hr>
-<p>Above all, the relation model is about</p>
-<ul>
-<li>Structure: The definition of relations and their contents</li>
-<li>Integrity: Ensure the database&rsquo;s contents satisfy constraints.</li>
-<li>Manipulation: How to access and modify a database&rsquo;s contents.</li>
-</ul>
-<h4 id="relation">Relation</h4>
-<p>A relation is unordered set that contain the relationship of attributes that represent entities</p>
-<p>A tuple is a set of attribute values(also known as its domain) in the iteration.</p>
-<ul>
-<li>Values are (normally) atomic / scalar.</li>
-<li>The special value NULL is a member of every domain.</li>
-</ul>
-<p>n-ary Relation = Table with n columns</p>
-<ol>
-<li>Primary keys</li>
-</ol>
-<p>A relation&rsquo;s primary key uniquely identifies a single tuple.</p>
-<p>For example, we can extend our Artist entity to Artist(id, name, year, country).</p>
-<ol start="2">
-<li>Foreign keys</li>
-</ol>
-<p>A foreign key specifies that an attribute from one relation has to map to a tuple in another relation.</p>
-<p>For example, we have the ids for Artist entity, but a album may have multiple artists, we need foreign keys to solve this:</p>
-<p>We can create a new entity like ArtistAlbum(artist_id, album_id)</p>
-<ol start="3">
-<li>Data Manipulate Languages (DML)</li>
-</ol>
-<p>We want to know: How to store and retrieve information from a database.</p>
-<p>Procedural:</p>
-<ul>
-<li>The query specifies the (high-level) strategy the DBMS should use to find the desired result.</li>
-<li>Need relational algebra (What we focus in this class)</li>
-</ul>
-<p>Non-Procedural (Declarative):</p>
-<ul>
-<li>The query specifies only what data is wanted and not how to find it.</li>
-<li>Need relational calculus</li>
-</ul>
-<h3 id="relational-algebra">Relational Algebra</h3>
-<p>Fundamental operations to retrieve and manipulate tuples in a relation. (Based on set algebra)</p>
-<p>Each operator takes one or more relations as its inputs and outputs a new relation.</p>
-<p>Select: $\sigma$  Projection: $\pi$  Union:$\cup$  Intersection: $\cap$  Difference: -  Product:  $\times$   Join:  $\Join$</p>
-<ol>
-<li>Select</li>
-</ol>
-<p>Choose a subset of the tuples from a relation that satisfies a selection predicate</p>
-<ul>
-<li>Predicate acts as a filter to retain only tuples that fulfill its qualifying requirement.</li>
-<li>Can combine multiple predicates using conjunctions / disjunctions</li>
-</ul>
-<p>Syntax: $\sigma_{predicate}$(R)</p>
-<p>In SQL:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">SELECT</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">FROM</span> R
-	<span style="color:#66d9ef">WHERE</span> a_id <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;a2&#39;</span> <span style="color:#66d9ef">AND</span> b_id <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">102</span>;
-</code></pre></div><ol start="2">
-<li>Projection</li>
-</ol>
-<p>Generate a relation with tuples that contains only the specified attributes.</p>
-<ul>
-<li>Can rearrange attributes' ordering.</li>
-<li>Can manipulate the values.</li>
-</ul>
-<p>Syntax: $\pi_{A1,A2,&hellip;An}$(R)</p>
-<p>In SQL:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">SELECT</span> b_id <span style="color:#f92672">-</span> <span style="color:#ae81ff">100</span>, a_id
-	<span style="color:#66d9ef">FROM</span> R <span style="color:#66d9ef">WHERE</span> a_id <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;a2&#39;</span>;
-</code></pre></div><ol start="3">
-<li>Union</li>
-</ol>
-<p>Generate a relation that contains all tuples that appear in either only one or both input relations</p>
-<p>Syntax: (R $\cup$ S)</p>
-<p>In SQL:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql">(<span style="color:#66d9ef">SELECT</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">FROM</span> R)
-	<span style="color:#66d9ef">UNION</span> <span style="color:#66d9ef">ALL</span>
-(<span style="color:#66d9ef">SELECT</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">FROM</span> S);
-</code></pre></div><ol start="4">
-<li>Difference</li>
-</ol>
-<p>Syntax: (R - S)</p>
-<p>In SQL:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql">(<span style="color:#66d9ef">SELECT</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">FROM</span> R)
-	<span style="color:#66d9ef">EXCEPT</span>
-(<span style="color:#66d9ef">SELECT</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">FROM</span> S);
-</code></pre></div><ol start="5">
-<li>Intersection</li>
-</ol>
-<p>Syntax: (R $\cap$ S)</p>
-<p>In SQL:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql">(<span style="color:#66d9ef">SELECT</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">FROM</span> R)
-	<span style="color:#66d9ef">INTERSECT</span>
-(<span style="color:#66d9ef">SELECT</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">FROM</span> S);
-</code></pre></div><ol start="6">
-<li>Product</li>
-</ol>
-<p>Syntax: (R $\times$ S)</p>
-<p>In SQL:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">SELECT</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">FROM</span> R <span style="color:#66d9ef">CROSS</span> <span style="color:#66d9ef">JOIN</span> S;
-</code></pre></div><ol start="7">
-<li>Join</li>
-</ol>
-<p>Join takes in two relations and outputs a relation that contains all the tuples that are a combination of two tuples where for each attribute  that the two relations share, the values for that attribute of both  tuples is the same.</p>
-<p>Syntax: (R $\Join$ S)</p>
-<p>In SQL:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">SELECT</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">FROM</span> R <span style="color:#66d9ef">NATURAL</span> <span style="color:#66d9ef">CROSS</span> S;
-</code></pre></div><p>The difference between “Join” and “Intersection” is that, Join doesn’t  require that the two relations have the exact same attributes, it only  requires that their common attributes should be the same.</p>
-<ol start="8">
-<li>Many more operations: Rename, Assignment, Duplicate Elimination &hellip;</li>
-</ol>
-<h3 id="observation">Observation</h3>
-<p>Relational algebra still defines the high-level steps of how to compute a query.</p>
-<blockquote>
-<p>We want to get all the tuples in relation R and S whose <code>b_id</code> equals 102.</p>
-</blockquote>
-<p>$\sigma_{b_id=102}(R \Join S)$ vs. $R\Join (\sigma_{b_id=102}(S))$</p>
-<p>From a high level, they both achieve this goal. However, their efficiency differs much.</p>
-<p>A better approach is to say the result you want, and let the DBMS decide the steps it wants to compute a query according to the data size. SQL  will do exactly this, and it is the de facto standard for writing  queries. (Non-procedure)</p>
-<p>The relational model is independent of any query language implementation.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">for</span> line <span style="color:#f92672">in</span> Artist<span style="color:#f92672">.</span>CSV:
-	record <span style="color:#f92672">=</span> parse(line)
-    <span style="color:#66d9ef">if</span> <span style="color:#e6db74">&#34;Ice Cube&#34;</span> <span style="color:#f92672">==</span> record[<span style="color:#ae81ff">0</span>]
-    	print int(record[<span style="color:#ae81ff">1</span>])
-</code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">SELECT</span> <span style="color:#66d9ef">year</span> <span style="color:#66d9ef">FROM</span> artists
-	<span style="color:#66d9ef">WHERE</span> name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Ice Cube&#34;</span>
-</code></pre></div><p>SQL ’s robustness is much stronger. It doesn’t depend on the  implementation of database, so if the low-level organization of the  database is changed (e.g. using a tree instead of a list to store data), the application layer doesn’t need to change (while the python code  becomes completely useless.)</p>
-<h2 id="conclusion">Conclusion</h2>
-<ul>
-<li>Databases are ubiquitous.</li>
-<li>Relational algebra defines the primitives for processing queries on a relational database.</li>
-<li>We will see relational algebra again when we talk about query optimization  + execution.</li>
-</ul>
+
+	<p><a href="/zju_ds/DS00.pdf">lecture01</a></p>
+<p><a href="/zju_ds/DS01_Ch02_Algorithm_Analysis(a).pdf">lecture02</a></p>
+<p><a href="/zju_ds/DS02_Ch02_Algorithm_Analysis(b).pdf">lecture03</a></p>
+<p><a href="/zju_ds/DS02_Ch03_List.pdf">lecture04</a></p>
+<p><a href="/zju_ds/DS03_Ch03_Stack_and_Queue.pdf">lecture05</a></p>
+<p><a href="/zju_ds/DS04_Ch04_Binary_Trees.pdf">lecture06</a></p>
+<p><a href="/zju_ds/DS05_Ch04_Search_Tree.pdf">lecture07</a></p>
+<p><a href="/zju_ds/DS06_Ch05_Priority_Queues.pdf">lecture08</a></p>
+<p><a href="/zju_ds/DS07_Ch08_Union_and_Find.pdf">lecture09</a></p>
+<p><a href="/zju_ds/DS08_Ch09_Graph_Definition_Topological_Sort.pdf">lecture10</a></p>
+<p><a href="/zju_ds/DS09_Ch10_Graph_dijkstra.pdf">lecture11</a></p>
+<p><a href="/zju_ds/DS10_Ch09_Network_Flow_MST.pdf">lecture12</a></p>
+<p><a href="/zju_ds/Hashing.pdf">lecture13</a></p>
+<p><a href="/zju_ds/More_sorting.pdf">lecture14</a></p>
+<p><a href="/zju_ds/Networkflow.pdf">lecture15</a></p>
+<p><a href="/zju_ds/Shell_merge_heap_sorting.pdf">lecture16</a></p>
+<p><a href="/zju_ds/Sorting.pdf">lecture17</a></p>
+<p><a href="/zju_ds/rehashing.pdf">lecture18</a></p>
 
 
-<footer class="footline">
+
+
+
+<footer class=" footline" >
 	
 </footer>
 
@@ -1080,6 +863,8 @@
             
                 
                     
+                        
+                        
                     
                 
                 
@@ -1096,7 +881,6 @@
             
                 
                     
-                    
                 
                 
 
@@ -1109,7 +893,6 @@
             
             
                 
-                    
                     
                 
                 
@@ -1126,9 +909,6 @@
             
             
                 
-                    
-                        
-                        
                     
                 
                 
@@ -1410,6 +1190,7 @@
             
                 
                     
+                    
                 
                 
 
@@ -1424,6 +1205,7 @@
             
             
                 
+                    
                     
                 
                 
@@ -1448,10 +1230,10 @@
 	 
 	 
 		
-			<a class="nav nav-prev" href="/cmucourses/cmu-15-445/" title="CS15-445: Database"> <i class="fa fa-chevron-left"></i></a>
+			<a class="nav nav-prev" href="/zjucourses/" title="ZJU-Courses"> <i class="fa fa-chevron-left"></i></a>
 		
 		
-			<a class="nav nav-next" href="/cmucourses/cmu-15-445/notes/lecture02/" title="Advanced SQL" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+			<a class="nav nav-next" href="/cmucourses/" title="CMU-Courses" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
 		
 	
     </div>
@@ -1483,4 +1265,3 @@
 
   </body>
 </html>
-
