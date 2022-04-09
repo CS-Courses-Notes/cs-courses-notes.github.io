@@ -12,20 +12,20 @@
     <title>Data Flow Analysis V : Foundations II :: CS-Courses-Notes</title>
 
     
-    <link href="/css/nucleus.css?1649469678" rel="stylesheet">
-    <link href="/css/fontawesome-all.min.css?1649469678" rel="stylesheet">
-    <link href="/css/hybrid.css?1649469678" rel="stylesheet">
-    <link href="/css/featherlight.min.css?1649469678" rel="stylesheet">
-    <link href="/css/perfect-scrollbar.min.css?1649469678" rel="stylesheet">
-    <link href="/css/auto-complete.css?1649469678" rel="stylesheet">
-    <link href="/css/atom-one-dark-reasonable.css?1649469678" rel="stylesheet">
-    <link href="/css/theme.css?1649469678" rel="stylesheet">
-    <link href="/css/tabs.css?1649469678" rel="stylesheet">
-    <link href="/css/hugo-theme.css?1649469678" rel="stylesheet">
+    <link href="/css/nucleus.css?1649470063" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1649470063" rel="stylesheet">
+    <link href="/css/hybrid.css?1649470063" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1649470063" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1649470063" rel="stylesheet">
+    <link href="/css/auto-complete.css?1649470063" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css?1649470063" rel="stylesheet">
+    <link href="/css/theme.css?1649470063" rel="stylesheet">
+    <link href="/css/tabs.css?1649470063" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1649470063" rel="stylesheet">
     
     
 
-    <script src="/js/jquery-3.3.1.min.js?1649469678"></script>
+    <script src="/js/jquery-3.3.1.min.js?1649470063"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -90,14 +90,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/js/lunr.min.js?1649469678"></script>
-<script type="text/javascript" src="/js/auto-complete.js?1649469678"></script>
+<script type="text/javascript" src="/js/lunr.min.js?1649470063"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1649470063"></script>
 <script type="text/javascript">
     
         var baseurl = "http:\/\/CS-Courses-Notes.github.io\/";
     
 </script>
-<script type="text/javascript" src="/js/search.js?1649469678"></script>
+<script type="text/javascript" src="/js/search.js?1649470063"></script>
 
     
   </div>
@@ -815,25 +815,25 @@ $$</p>
 <h2 id="worklist-algorithm---an-optimization-of-iterative-algorithm">Worklist Algorithm - an optimization of iterative algorithm</h2>
 <p>In our iterative algorithm, even if only a few nodes got updated, we still have to go through all the nodes in the next iteration.</p>
 <p>Worklist Algorithm for forward analysis:</p>
-<pre tabindex="0"><code>​	OUT[entry] = empty set;
+<pre tabindex="0"><code>​OUT[entry] = empty set;
 
-​	for each basic block B\entry
+​for each basic block B\entry
 
-​		OUT[B] = empty set;
+​	OUT[B] = empty set;
 
-​	Worklist &lt;- all basic blocks
+​Worklist &lt;- all basic blocks
 
-​	while Worklist is not empty
+​while Worklist is not empty
 
-​		Pick a BB B from Worklist
+​	Pick a BB B from Worklist
 
-​		old_OUT = OUT[B]
+​	old_OUT = OUT[B]
 
-​		update IN[B] and OUT[B]
+​	update IN[B] and OUT[B]
 
-​		if old_OUT != OUT[B]
+​	if old_OUT != OUT[B]
 
-​				Add all successors of B to Worklist
+​		Add all successors of B to Worklist
 </code></pre>
 
 <footer class="footline">
@@ -1208,16 +1208,16 @@ $$</p>
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/js/clipboard.min.js?1649469678"></script>
-    <script src="/js/perfect-scrollbar.min.js?1649469678"></script>
-    <script src="/js/perfect-scrollbar.jquery.min.js?1649469678"></script>
-    <script src="/js/jquery.sticky.js?1649469678"></script>
-    <script src="/js/featherlight.min.js?1649469678"></script>
-    <script src="/js/highlight.pack.js?1649469678"></script>
+    <script src="/js/clipboard.min.js?1649470063"></script>
+    <script src="/js/perfect-scrollbar.min.js?1649470063"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1649470063"></script>
+    <script src="/js/jquery.sticky.js?1649470063"></script>
+    <script src="/js/featherlight.min.js?1649470063"></script>
+    <script src="/js/highlight.pack.js?1649470063"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/js/modernizr.custom-3.6.0.js?1649469678"></script>
-    <script src="/js/learn.js?1649469678"></script>
-    <script src="/js/hugo-learn.js?1649469678"></script>
+    <script src="/js/modernizr.custom-3.6.0.js?1649470063"></script>
+    <script src="/js/learn.js?1649470063"></script>
+    <script src="/js/hugo-learn.js?1649470063"></script>
     
         
             <script src="https://unpkg.com/mermaid@8.8.0/dist/mermaid.min.js"></script>
