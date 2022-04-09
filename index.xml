@@ -7,20 +7,6 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language><atom:link href="http://CS-Courses-Notes.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Advanced SQL</title>
-      <link>http://CS-Courses-Notes.github.io/cmucourses/cmu-15-445/notes/lecture02/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>http://CS-Courses-Notes.github.io/cmucourses/cmu-15-445/notes/lecture02/</guid>
-      <description>History of SQL Originally &amp;ldquo;SEQUEL&amp;rdquo; from IBM&amp;rsquo;s System R prototype.
-   Structured English Query Language.
-  Adopted by Oracle in the 1970s.
-   ANSI Standard in 1986. ISO in 1987 &amp;ndash;&amp;gt; Structured Query Language
-Current standard is SQL 2016
- SQL 2016 : JSON, Polymorphic tables SQL 2011 : Temporal DBs, Pipelined DML SQL 2008: TRUNCATE, Fancy ORDER SQL 2003: XML, windows, sequences, auto-generated IDs SQL 1999: Regex, triggers, OO   Relational Languages:</description>
-    </item>
-    
-    <item>
       <title>Course Introduction &amp; Relational Model</title>
       <link>http://CS-Courses-Notes.github.io/cmucourses/cmu-15-445/notes/lecture01/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -33,17 +19,6 @@ Current standard is SQL 2016
     </item>
     
     <item>
-      <title>Database Storage - Part I</title>
-      <link>http://CS-Courses-Notes.github.io/cmucourses/cmu-15-445/notes/lecture03/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>http://CS-Courses-Notes.github.io/cmucourses/cmu-15-445/notes/lecture03/</guid>
-      <description>Overview:
- We now understand what a database looks like at a logical level and how to write queries to read/write data from it. We will next learn how to build software that manages a database.   Layout of Database:
-graph TD; 1[Query Planning] 2[Operator Execution] 3[Access Methods] 4[Buffer Pool Manager] 5[Disk Manager] 1 --&amp;gt; 2 2 --&amp;gt; 3 3 --&amp;gt; 4 4 --&amp;gt; 5 We will go through these different layers bottom-up.</description>
-    </item>
-    
-    <item>
       <title>Intermediate Presentation</title>
       <link>http://CS-Courses-Notes.github.io/njucourses/static-program-analysis/lecture/intermediate-representation/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -51,6 +26,20 @@ graph TD; 1[Query Planning] 2[Operator Execution] 3[Access Methods] 4[Buffer Poo
       <guid>http://CS-Courses-Notes.github.io/njucourses/static-program-analysis/lecture/intermediate-representation/</guid>
       <description>Layout:  Compilers and Static Analyzers AST vs. IR IR: Three-Address Code 3AC in Real Static Analyzer: Soot Static Single Assignment Basic Blocks Control Flow Graphs     Finishing this class, you need to know the answers to the following questions:
  The relation between compilers and static analyzers Understand 3AC and its common forms (in IR jimple) How to build basic blocks on top of IR How to construct control flow graphs on top of BBS.</description>
+    </item>
+    
+    <item>
+      <title>Advanced SQL</title>
+      <link>http://CS-Courses-Notes.github.io/cmucourses/cmu-15-445/notes/lecture02/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://CS-Courses-Notes.github.io/cmucourses/cmu-15-445/notes/lecture02/</guid>
+      <description>History of SQL Originally &amp;ldquo;SEQUEL&amp;rdquo; from IBM&amp;rsquo;s System R prototype.
+   Structured English Query Language.
+  Adopted by Oracle in the 1970s.
+   ANSI Standard in 1986. ISO in 1987 &amp;ndash;&amp;gt; Structured Query Language
+Current standard is SQL 2016
+ SQL 2016 : JSON, Polymorphic tables SQL 2011 : Temporal DBs, Pipelined DML SQL 2008: TRUNCATE, Fancy ORDER SQL 2003: XML, windows, sequences, auto-generated IDs SQL 1999: Regex, triggers, OO   Relational Languages:</description>
     </item>
     
     <item>
@@ -75,6 +64,17 @@ Recall 1st lecture:
  Live variables analysis tells whether the value of variable v at program point p could be used along some path in CFG starting at p. If so, v is live at p; otherwise, v is dead at p.  One application:
  Information of live variables can be used for register allocations.  Understanding Live Variables Analysis
 graph TD; 1[v = 3] 2[B. ?] 3[p1. ... = v] 4[p2.</description>
+    </item>
+    
+    <item>
+      <title>Database Storage - Part I</title>
+      <link>http://CS-Courses-Notes.github.io/cmucourses/cmu-15-445/notes/lecture03/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://CS-Courses-Notes.github.io/cmucourses/cmu-15-445/notes/lecture03/</guid>
+      <description>Overview:
+ We now understand what a database looks like at a logical level and how to write queries to read/write data from it. We will next learn how to build software that manages a database.   Layout of Database:
+graph TD; 1[Query Planning] 2[Operator Execution] 3[Access Methods] 4[Buffer Pool Manager] 5[Disk Manager] 1 --&amp;gt; 2 2 --&amp;gt; 3 3 --&amp;gt; 4 4 --&amp;gt; 5 We will go through these different layers bottom-up.</description>
     </item>
     
     <item>

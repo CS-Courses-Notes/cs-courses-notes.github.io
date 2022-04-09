@@ -2,17 +2,17 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>http://CS-Courses-Notes.github.io/cmucourses/cmu-15-445/notes/lecture02/</loc>
-  </url><url>
     <loc>http://CS-Courses-Notes.github.io/cmucourses/cmu-15-445/notes/lecture01/</loc>
   </url><url>
-    <loc>http://CS-Courses-Notes.github.io/cmucourses/cmu-15-445/notes/lecture03/</loc>
-  </url><url>
     <loc>http://CS-Courses-Notes.github.io/njucourses/static-program-analysis/lecture/intermediate-representation/</loc>
+  </url><url>
+    <loc>http://CS-Courses-Notes.github.io/cmucourses/cmu-15-445/notes/lecture02/</loc>
   </url><url>
     <loc>http://CS-Courses-Notes.github.io/njucourses/static-program-analysis/lecture/data-flow-analysis-i/</loc>
   </url><url>
     <loc>http://CS-Courses-Notes.github.io/njucourses/static-program-analysis/lecture/data-flow-analysis-ii/</loc>
+  </url><url>
+    <loc>http://CS-Courses-Notes.github.io/cmucourses/cmu-15-445/notes/lecture03/</loc>
   </url><url>
     <loc>http://CS-Courses-Notes.github.io/njucourses/static-program-analysis/lecture/data-flow-analysis-iii/</loc>
   </url><url>
