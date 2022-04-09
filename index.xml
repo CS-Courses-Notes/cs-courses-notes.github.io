@@ -87,46 +87,10 @@ void foo(){ int n = ten(); addOne(42); } int ten(){ return 10; } int addOne(int 
     
     <item>
       <title></title>
-      <link>http://CS-Courses-Notes.github.io/cmucourses/readme/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>http://CS-Courses-Notes.github.io/cmucourses/readme/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title></title>
-      <link>http://CS-Courses-Notes.github.io/illinoiscourses/readme/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>http://CS-Courses-Notes.github.io/illinoiscourses/readme/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title></title>
       <link>http://CS-Courses-Notes.github.io/mitcourses/6.s081/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>http://CS-Courses-Notes.github.io/mitcourses/6.s081/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title></title>
-      <link>http://CS-Courses-Notes.github.io/seucourses/readme/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>http://CS-Courses-Notes.github.io/seucourses/readme/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title></title>
-      <link>http://CS-Courses-Notes.github.io/stanfordcourses/readme/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>http://CS-Courses-Notes.github.io/stanfordcourses/readme/</guid>
       <description></description>
     </item>
     
